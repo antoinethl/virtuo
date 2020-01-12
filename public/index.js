@@ -158,6 +158,28 @@ const actors = [{
   }]
 }];
 
+// Step 1 :
+rentals.forEach(x => {
+  const car=cars.find(c => c.id==x.carId);
+  const distance_comp=x.distance*car.pricePerKm;
+  const number_of_day = (new Date(x.returnDate) - new Date(x.pickupDate)) / 86400000 + 1;
+  const time_comp=number_of_day*car.pricePerDay;
+  x.price = time_comp+distance_comp;
+  console.log(x.price);
+  if(number_of_day > 10){
+    x.price -= x.price*0.5;
+  }
+  else if (number_of_day > 4){
+    x.price -= x.price*0.3;
+  }
+  else if (number_of_day > 1){
+    x.price -= x.price * 0.1;
+  }
+  console.log(x.price);
+
+});
+
 console.log(cars);
 console.log(rentals);
 console.log(actors);
+
