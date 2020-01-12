@@ -185,6 +185,8 @@ rentals.forEach(x => {
   x.commission.treasury = number_of_day;
   x.commission.virtuo = commission - x.commission.insurance - x.commission.treasury;
 
+  // Step 4 :
+  
   if(x.options.deductibleReduction){
     x.price += 4*number_of_day;
     x.commission.virtuo += 4*number_of_day;
