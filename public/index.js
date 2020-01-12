@@ -186,11 +186,25 @@ rentals.forEach(x => {
   x.commission.virtuo = commission - x.commission.insurance - x.commission.treasury;
 
   // Step 4 :
-  
+
   if(x.options.deductibleReduction){
     x.price += 4*number_of_day;
     x.commission.virtuo += 4*number_of_day;
   }
+
+  // Step 5 :
+  
+  const actor = actors.find(act => act.rentalId == x.id);
+  var actor_payment = actor.payment.find(p => p.who == "driver");
+  actor_payment.amount = x.price;
+  actor_payment = actor.payment.find(p => p.who == "partner");
+  actor_payment.amount = x.price - commission;
+  actor_payment = actor.payment.find(p => p.who == "insurance");
+  actor_payment.amount = x.commission.insurance;
+  actor_payment = actor.payment.find(p => p.who == "treasury");
+  actor_payment.amount = x.commission.treasury;
+  actor_payment = actor.payment.find(p => p.who == "virtuo");
+  actor_payment.amount = x.commission.virtuo;
 });
 
 console.log(cars);
