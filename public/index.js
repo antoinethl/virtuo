@@ -165,7 +165,9 @@ rentals.forEach(x => {
   const number_of_day = (new Date(x.returnDate) - new Date(x.pickupDate)) / 86400000 + 1;
   const time_comp=number_of_day*car.pricePerDay;
   x.price = time_comp+distance_comp;
-  console.log(x.price);
+
+  // Step 2 :
+
   if(number_of_day > 10){
     x.price -= x.price*0.5;
   }
@@ -175,8 +177,13 @@ rentals.forEach(x => {
   else if (number_of_day > 1){
     x.price -= x.price * 0.1;
   }
-  console.log(x.price);
 
+  // Step 3 :
+
+  const commission = (x.price * 0.3).toFixed(2);
+  x.insurance = commission / 2;
+  x.treasury = number_of_day;
+  x.virtuo = commission - x.insurance - x.treasury;
 });
 
 console.log(cars);
