@@ -178,6 +178,10 @@ rentals.forEach(x => {
     x.price -= x.price * 0.1;
   }
 
+  if(x.options.deductibleReduction){
+    x.price += 4*number_of_day;
+  }
+
   // Step 3 :
 
   const commission = (x.price * 0.3).toFixed(2);
